@@ -12,7 +12,7 @@ class DBPostgres():
                     )
         self.cursor  = self.conn.cursor() 
 
-    def get_execute(self, request, param):
+    def get_execute(self, request:str, param:tuple):
             try:
                 self.cursor.execute(request, param)
                 self.conn.commit()
@@ -21,7 +21,7 @@ class DBPostgres():
                 self.conn.rollback()
                 return False
 
-    def set_record(self, values):
+    def set_record(self, values:tuple):
             request = f'''
                     INSERT INTO "{TABLE_NAME}" 
                     ({ID_QUESTION}, {ANSWER}, {QUESTION}, {CREATED}) 

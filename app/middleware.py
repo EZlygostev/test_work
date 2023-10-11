@@ -9,7 +9,7 @@ class RecordsResponse():
     def __init__(self):
         self.list_response = ['']
         
-    def set_record(self, value):
+    def set_record(self, value:str):
         self.list_response.append(value)
 
 app =  FastAPI()
