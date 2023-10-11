@@ -1,0 +1,29 @@
+services:
+  db:
+    image: postgres
+    container_name: postgres
+    restart: always
+    env_file:
+      - .env
+    volumes:
+      - ./db_data:/var/lib/postgresql/db_data
+    ports:
+    - 5432:5432
+  adminer:
+    container_name: adminer
+    image: adminer
+    restart: always
+    ports:
+    - 8080:8080
+  test:
+    image: python:3.10
+    container_name: test
+    depends_on:
+      - db
+    volumes:
+      - ./app/:/app
+      - ./requirements.txt:/app/requirements.txt
+      - ./run.sh:/app/run.sh
+    command: /bin/sh /app/run.sh
+    ports:
+    - 80:80
